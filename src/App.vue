@@ -1,9 +1,15 @@
-
 <template>
-  <main> 
+  <main>
     <div v-if="showModal" class="overlay">
       <div class="modal">
-        <textarea v-model.trim="newNote" name="note" id="note" cols="30" rows="10" lang="it"></textarea>
+        <textarea
+          v-model.trim="newNote"
+          name="note"
+          id="note"
+          cols="30"
+          rows="10"
+          lang="it"
+        ></textarea>
         <p v-if="errorMessage">{{ errorMessage }}</p>
         <button @click="addNote" class="add-note-button">Add Note</button>
         <button @click="showModal = false" class="close-button">Close</button>
@@ -12,15 +18,27 @@
     <div class="container">
       <header>
         <h1>Notes</h1>
-        <button @click="showModal = true" class="add-button" title="Add a note">+</button>
+        <button @click="showModal = true" class="add-button" title="Add a note">
+          +
+        </button>
       </header>
       <div class="cards-container">
-        <p v-if="showEmptyMessage" class="empty-content-text"><i>There are no notes at the moment. Click the button to add one </i>😊</p>
-        <div v-for="note in notes" :key="note.id" class="card" :style="{backgroundColor: note.backgroundColor}">
-          <p class="main-text"> {{ note.text  }}</p>
+        <p v-if="showEmptyMessage" class="empty-content-text">
+          <i>There are no notes at the moment. Click the button to add one </i
+          >😊
+        </p>
+        <div
+          v-for="note in notes"
+          :key="note.id"
+          class="card"
+          :style="{ backgroundColor: note.backgroundColor }"
+        >
+          <p class="main-text">{{ note.text }}</p>
           <div class="date-delete-contaier">
-            <p class="date"> {{ note.date .toLocaleDateString('it-EU')}}</p>
-            <button @click="deleteNote(note.id)"  class="delete-bouton" >x</button>
+            <p class="date">{{ note.date.toLocaleDateString("it-EU") }}</p>
+            <button @click="deleteNote(note.id)" class="delete-bouton">
+              x
+            </button>
           </div>
         </div>
       </div>
@@ -28,13 +46,12 @@
   </main>
 </template>
 
-
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const showModal = ref(false);
-const newNote = ref('');
-const errorMessage = ref('')
+const newNote = ref("");
+const errorMessage = ref("");
 const notes = ref([]);
 const showEmptyMessage = ref(true);
 
@@ -44,33 +61,30 @@ function getRandomColor() {
 
 const addNote = () => {
   if (newNote.value.length < 7) {
-    return errorMessage.value = 'Note needs to be 7 characters or more'
+    return (errorMessage.value = "Note needs to be 7 characters or more");
   }
   notes.value.push({
     id: Math.floor(Math.random() * 1000000),
     text: newNote.value,
     date: new Date(),
-    backgroundColor: getRandomColor()
+    backgroundColor: getRandomColor(),
   });
 
   showModal.value = false;
-  newNote.value = '';
-  errorMessage.value = '';
+  newNote.value = "";
+  errorMessage.value = "";
   showEmptyMessage.value = false;
-}
+};
 
 const deleteNote = (id) => {
-  notes.value = notes.value.filter(note => note.id !== id)
+  notes.value = notes.value.filter((note) => note.id !== id);
   if (notes.value.length === 0) {
     showEmptyMessage.value = true;
   }
-}
-
+};
 </script>
 
-
 <style scoped>
-
 .empty-content-text {
   font-size: 15px;
   margin-top: 20px;
@@ -105,7 +119,6 @@ h1 {
   border-radius: 100%;
   color: white;
   font-size: 10px;
-
 }
 
 .card {
@@ -123,7 +136,7 @@ h1 {
 }
 
 .card:hover {
-  box-shadow: -8px 1px 34px -15px rgba(0,0,0,0.75);
+  box-shadow: -8px 1px 34px -15px rgba(0, 0, 0, 0.75);
 }
 
 .date {
@@ -153,18 +166,17 @@ h1 {
   opacity: 0.8;
 }
 
-
 .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.77);
+  background-color: rgba(0, 0, 0, 0.77);
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.modal{
+.modal {
   width: 750px;
   background-color: white;
   border-radius: 10px;
@@ -202,8 +214,4 @@ h1 {
   color: red;
   margin-top: 5px;
 }
-
-
-
-
 </style>
