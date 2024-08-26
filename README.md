@@ -1,4 +1,7 @@
-# Vue 3 + Vite
+# Note App with Vue 3 + Vite
+
+
+![Screenshot 2024-08-26 182732](https://github.com/user-attachments/assets/4c92a86b-94b2-4031-8214-46bdfcfaba32)
 
 This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
